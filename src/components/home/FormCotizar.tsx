@@ -42,7 +42,7 @@ const FormCotizar = () => {
       setuser(res)
       navigate("../plan", { replace: true })
     }).catch(err => {
-
+      console.log(err)
     })
   }
 
