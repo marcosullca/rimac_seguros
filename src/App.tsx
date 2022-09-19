@@ -3,6 +3,7 @@ import { AppProvider } from './contexts/appContext';
 import IconLogo from './assets/home/logo';
 import IconPhone from './assets/home/phone.svg'
 import './styles/base.scss'
+import { PlanProviderComponent } from './contexts/planContext';
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
             </div>
           </div>
         </div>
-        <Outlet />
+        <PlanProviderComponent>
+          <Outlet />
+        </PlanProviderComponent>
       </div>
     </AppProvider>
   );

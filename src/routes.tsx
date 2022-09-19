@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react'
 import { useRoutes, Navigate } from 'react-router-dom'
-import App from './App'
 // import PageHome from './pages/home'
 const PageHome = React.lazy(() => import("./pages/home"))
 const PagePlan = React.lazy(() => import("./pages/plan"))
+const App = React.lazy(() => import("./App"))
 
 const RoutesApp = () => {
     return useRoutes([
