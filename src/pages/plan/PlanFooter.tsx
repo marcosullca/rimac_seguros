@@ -1,8 +1,13 @@
+import { useNavigate } from 'react-router-dom'
 import IconCheck from '../../assets/plan/gl_check.svg'
 import { useStatePlanContext } from '../../contexts/planContext'
 
 const PlanFooter = () => {
     const { amount } = useStatePlanContext()
+    const navigate = useNavigate()
+    const handleClick = () => {
+        navigate("../gracias", { state: { amount } })
+    }
     return (
         <>
             <section>
@@ -31,7 +36,7 @@ const PlanFooter = () => {
                     <span>Aros gratis</span>
                 </div>
             </div>
-            <button className='plan-footer__btn'>
+            <button className='plan-footer__btn' onClick={handleClick}>
                 LO QUIERO
             </button>
         </>

@@ -2,8 +2,9 @@ import { Outlet } from 'react-router-dom'
 import { AppProvider } from './contexts/appContext';
 import IconLogo from './assets/home/logo';
 import IconPhone from './assets/home/phone.svg'
-import './styles/base.scss'
 import { PlanProviderComponent } from './contexts/planContext';
+import './styles/base.scss'
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Outlet />
         </PlanProviderComponent>
       </div>
+      <ScrollToTop />
     </AppProvider>
   );
 }
