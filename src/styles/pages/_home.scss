@@ -1,0 +1,231 @@
+.home {
+    grid-template-rows: 200px 1fr;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "left"
+        "right";
+
+    &-left {
+        grid-area: left;
+        background-color: $color-primary-n100;
+        &-center {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            .img_car {
+                display: none;
+            }
+            .img_car__mobile {
+                position: absolute;
+                right: 0px;
+                bottom: -16px;
+            }
+            .section-explain {
+                color: $color-title;
+                margin-left: 32px;
+                margin-top: 16px;
+                margin-bottom: 50px;
+                width: 200px;
+                p {
+                    font-size: 10px;
+                    letter-spacing: 0.8px;
+                    font-weight: 700;
+                    line-height: 16px;
+                }
+                .section-explain__title {
+                    font-weight: 400;
+                    font-size: 28px;
+                    span:nth-child(1) {
+                        margin-right: 4px;
+                    }
+                    span:nth-child(2),
+                    span:nth-child(3) {
+                        color: #ff1c44;
+                    }
+
+                    span:nth-child(3) {
+                        display: block;
+                    }
+                }
+                .section-explain__concept {
+                    color: $color-title_paragraph;
+                    font-size: 14px;
+                    margin-top: 12px;
+                }
+            }
+        }
+    }
+
+    &-right {
+        margin-top: 24px;
+        grid-area: right;
+        display: flex;
+        justify-content: center;
+
+        &__form {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            .container-form__input {
+                display: flex;
+                flex-direction: column;
+                > input {
+                    height: 50px;
+                    border: 2px solid #c5cbe0;
+                    border-radius: 4.03px;
+                    padding-left: 8px;
+                }
+                > span {
+                    font-size: 11px;
+                    color: $color-c200;
+                }
+            }
+        }
+        .container-form__documento {
+            display: flex;
+            border: 2px solid #c5cbe0;
+            border-radius: 4.03px;
+            align-items: center;
+            margin-top: 8px;
+            > .form-input__documento {
+                flex-grow: 1;
+                input {
+                    width: 90%;
+                    height: 50px;
+                    border: none;
+                    padding-left: 8px;
+                }
+            }
+            select {
+                // -webkit-appearance: none;
+                // -moz-appearance: none;
+                // appearance: none;
+                height: 50px;
+                border: none;
+                width: 60px;
+                border-right: solid 1.01px #c5cbe0;
+                // &::-ms-expand {
+                //     display: none;
+                // }
+            }
+        }
+
+        &__title {
+            font-size: 24px;
+            font-weight: 400;
+            font-family: Arial, Helvetica, sans-serif;
+            color: $color-title_paragraph;
+        }
+
+        &__btn {
+            color: $color-white;
+            padding: 20px 32px;
+            background-color: $color-primary;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.8px;
+            line-height: 16px;
+            cursor: pointer;
+        }
+
+        &__cb {
+            color: $color-textos-adicionales;
+            font-size: 12px;
+        }
+
+        &_errorTerms {
+            font-size: 10px;
+            color: $color-textos-adicionales;
+        }
+    }
+
+    &-absolute-container {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .home {
+        display: relative;
+        width: auto;
+        margin: 0px;
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 530px 1fr;
+        grid-template-areas: "left right";
+
+        &-left {
+            &-center {
+                flex-direction: column-reverse;
+                align-items: center;
+                .img_car {
+                    display: block;
+                    position: relative;
+                    z-index: 104;
+                    margin-top: 56px;
+                    margin-left: 120px;
+                }
+
+                .img_car__mobile {
+                    display: none;
+                }
+
+                .section-explain {
+                    width: 280px;
+                    p {
+                        font-size: 12px;
+                        letter-spacing: 0.8px;
+                        font-weight: 700;
+                    }
+                    .section-explain__title {
+                        font-weight: 400;
+                        font-size: 36px;
+                        span:nth-child(1) {
+                            margin-right: 4px;
+                        }
+                        span:nth-child(2),
+                        span:nth-child(3) {
+                            color: #ff1c44;
+                        }
+
+                        span:nth-child(3) {
+                            display: block;
+                        }
+                    }
+                    .section-explain__concept {
+                        color: $color-title_paragraph;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        &-right {
+            margin-top: 80px;
+        }
+        &-absolute-container {
+            display: block;
+            position: fixed;
+            top: 0px;
+            .img_bg {
+                height: 100vh;
+                min-height: 700px;
+                display: block;
+            }
+        }
+        &__description-terms-conditions {
+            width: 100%;
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            padding: 24px 0px;
+            color: $color-gray_3;
+            font-weight: 300;
+            font-size: 12px;
+            text-align: center;
+        }
+    }
+}

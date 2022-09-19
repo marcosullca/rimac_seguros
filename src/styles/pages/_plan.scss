@@ -1,0 +1,470 @@
+.plan {
+    display: flex;
+    flex-direction: column;
+    &-stepper {
+        margin: 12px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        &-desktop {
+            display: none;
+        }
+        &__btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid $color-gray_6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            > .arrow-left {
+                path {
+                    fill: $color-gray_6;
+                }
+            }
+        }
+        &__text {
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 11px;
+            line-height: 16px;
+            color: $color-gray_2;
+        }
+        &__bar {
+            width: 176px;
+            height: 6px;
+            background-color: $color-secondary;
+            border-radius: 20px;
+        }
+    }
+
+    &-info {
+        height: 340px;
+        background-color: $color-gray_7;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 0px 32px;
+
+        &__back {
+            display: none;
+        }
+        &__title-mobile {
+            margin-top: 40px;
+            font-weight: 400;
+            font-size: 28px;
+            line-height: 36px;
+            font-style: normal;
+            letter-spacing: 0.6px;
+            color: $color-gray_1;
+        }
+        &__title-desktop {
+            display: none;
+        }
+
+        &__subtitle {
+            margin-top: 8px;
+            color: $color-gray_2;
+            font-size: 16px;
+            font-style: normal;
+            line-height: 28px;
+        }
+
+        &__items {
+            margin-top: 16px;
+            width: 100%;
+            background-color: $color-white;
+            display: flex;
+            border-radius: 12px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0px;
+            position: relative;
+            box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        &-left {
+            width: 176px;
+            padding: 32px 16px;
+            &__placa {
+                text-transform: uppercase;
+                line-height: 20px;
+                font-weight: 400;
+                font-style: normal;
+                color: $color-gray_3;
+            }
+            &__marca {
+                margin-top: 4px;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 24px;
+                color: $color-gray_1;
+                font-style: normal;
+            }
+        }
+        &__img {
+            position: absolute;
+            right: 0px;
+            top: -8px;
+        }
+    }
+
+    // PLAN CALCULOS
+    &-calculos {
+        margin-top: 44px;
+        display: flex;
+        flex-direction: column;
+        padding: 0px 32px;
+        &__title {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0.2px;
+            color: $color-gray_1;
+            margin-bottom: 4px;
+        }
+        &__minmax {
+            display: flex;
+        }
+        &__min {
+            padding-right: 12px;
+            border-right: 2px solid $color-gray_5;
+        }
+        &__max {
+            padding-left: 12px;
+        }
+        &__min,
+        &__max {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 16px;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: $color-gray_2;
+        }
+
+        &-counter {
+            margin-left: 16px;
+            margin-top: 16px;
+            display: flex;
+            border: 1px solid $color-gray_4;
+            justify-content: space-between;
+            border-radius: 4px;
+            padding: 16px;
+            > button {
+                cursor: pointer;
+                width: 35px;
+                height: 35px;
+                border: none;
+                background-color: $color-white;
+                font-size: 24px;
+                color: $color-secondary;
+                &:hover {
+                    border-radius: 50%;
+                    background-color: $color-gray_5;
+                }
+            }
+            &__current {
+                max-width: 80px;
+                margin-right: 0px !important;
+                display: flex;
+                align-items: center;
+                color: $color-gray_1;
+                font-size: 16px;
+                outline: none;
+                border-style: none;
+            }
+        }
+    }
+
+    //  PLAN COBERTURAS
+    &-coberturas {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+
+        > p {
+            margin-bottom: 20px;
+            margin-left: 32px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 28px;
+            color: $color-gray_1;
+        }
+        &-tabs {
+            display: flex;
+            margin: 0px 24px;
+            // border-bottom: 2px solid $color-gray_5;
+            justify-content: space-between;
+            &__item {
+                padding: 12px 8px;
+                text-align: center;
+                text-transform: uppercase;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 10px;
+                line-height: 16px;
+                letter-spacing: 0.8px;
+                color: $color-gray_1;
+                border-bottom: 2px solid $color-gray_5;
+
+                &.active {
+                    color: $color-primary;
+                    border-bottom: 2px solid $color-primary;
+                }
+            }
+        }
+
+        &-carguard {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            &__item {
+                margin-top: 24px;
+                padding: 0px 16px;
+                .carguard {
+                    display: flex;
+                    padding-bottom: 24px;
+                    border-bottom: 2px solid $color-gray_5;
+                    &-content {
+                        padding: 0px 16px;
+                        flex-grow: 1;
+                        &-top {
+                            display: flex;
+                            justify-content: space-between;
+                            &__title {
+                                max-width: 150px;
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 16px;
+                                line-height: 24px;
+                                color: $color-gray_1;
+                            }
+                        }
+                        &__text {
+                            margin-top: 8px;
+                            font-size: 14px;
+                            color: $color-gray_2;
+                        }
+
+                        &__footer {
+                            cursor: pointer;
+                            margin-top: 16px;
+                            span {
+                                font-size: 10px;
+                                color: $color-secondary;
+                                font-weight: 700;
+                                margin-right: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // PLAN FOOTER
+    &-footer {
+        display: flex;
+        margin-top: 106px;
+        justify-content: space-between;
+        padding: 16px 32px;
+        &__btn {
+            @extend .btn__form;
+        }
+        section {
+            display: flex;
+            flex-direction: column;
+        }
+        &__value {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 32px;
+            color: $color-gray_1;
+        }
+        &__text {
+            font-style: normal;
+            font-weight: 700;
+            font-size: 10px;
+            line-height: 16px;
+            letter-spacing: 0.8px;
+            color: $color-gray_1;
+        }
+        &__title {
+            font-style: normal;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 16px;
+            text-transform: uppercase;
+            color: $color-gray_1;
+        }
+        &__items {
+            display: none;
+        }
+        &__item {
+            display: flex;
+            gap: 8px;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .plan {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 25% 1.2fr 1fr;
+        grid-template-areas: "header center footer";
+        gap: 56px;
+        &-stepper {
+            display: none;
+        }
+        &-stepper-desktop {
+            display: block;
+            grid-area: header;
+            background-color: $color-gray_7;
+            &__container {
+                margin-top: 52px;
+            }
+            &__step {
+                display: flex;
+                justify-content: center;
+                gap: 16px;
+            }
+            &__line {
+                height: 40px;
+                width: 12px;
+                border-right: 2px dashed $color-gray_5;
+                // border-right: 2px dashed black;
+            }
+            &__left {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                span {
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 50%;
+                    border: 1px solid $color-gray_3;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: $color-gray_3;
+                    &.active {
+                        color: $color-white;
+                        background-color: $color-secondary;
+                        border-color: $color-secondary;
+                    }
+                }
+            }
+            &__right {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                span {
+                    color: $color-gray_3;
+                    &.active {
+                        color: $color-gray_1;
+                    }
+                }
+            }
+        }
+        &-coberturas {
+            margin-top: 56px;
+        }
+        &-info {
+            margin-top: 48px;
+            background-color: $color-white;
+            &__back {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                span {
+                    color: $color-gray_3;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 16px;
+                }
+            }
+            &__title-mobile {
+                display: none;
+            }
+            &__title-desktop {
+                display: block;
+                margin-top: 40px;
+                span {
+                    font-weight: 400;
+                    font-size: 28px;
+                    line-height: 36px;
+                    font-style: normal;
+                    letter-spacing: 0.6px;
+                }
+                span:nth-child(1) {
+                    color: $color-gray_1;
+                }
+                span:nth-child(2) {
+                    color: $color-primary;
+                }
+            }
+            &__btn {
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                border: 1px solid $color-primary;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                > .arrow-left {
+                    path {
+                        fill: $color-primary;
+                    }
+                }
+            }
+        }
+        &-center {
+            grid-area: center;
+        }
+        &-footer {
+            max-width: 300px;
+            flex-direction: column;
+            justify-content: flex-start;
+            grid-area: footer;
+            gap: 32px;
+            padding: 16px 32px 16px 0px;
+            section {
+                padding-bottom: 20px;
+                border-bottom: 2px solid $color-gray_5;
+                gap: 8px;
+            }
+            &__text {
+                color: $color-gray_2;
+                font-size: 10px;
+                text-transform: lowercase;
+                font-weight: 400;
+            }
+            &__items {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+        &-calculos {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            &-counter {
+                margin-top: 0px;
+                padding: 8px;
+                &__current {
+                    margin: 0px 16px;
+                }
+            }
+        }
+    }
+}

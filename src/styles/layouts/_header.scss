@@ -1,0 +1,68 @@
+.app {
+    &-top {
+        background-color: $color-primary-n100;
+        grid-area: header;
+        height: 62px;
+        display: flex;
+        &__contact {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            margin-right: 32px;
+        }
+        &__logo {
+            margin: 20px 0px;
+            margin-left: 32px;
+            z-index: 101;
+        }
+
+        &__phone {
+            display: flex;
+            gap: 8px;
+            .contact-text {
+                display: block;
+            }
+            .contact-number {
+                display: none;
+            }
+            img {
+                width: 15px;
+            }
+            > span {
+                color: $color-secondary;
+                font-size: 16px;
+            }
+        }
+        &__question {
+            display: none;
+            margin-right: 24px;
+            font-size: 14px;
+        }
+    }
+}
+@media screen and (min-width: 1024px) {
+    .app {
+        &-top {
+            background-color: white;
+            &__logo {
+                margin: 24px 0px;
+                margin-left: 120px;
+            }
+            &__contact {
+                margin-right: 120px;
+            }
+
+            &__question {
+                display: block;
+            }
+            &__phone {
+                .contact-text {
+                    display: none;
+                }
+                .contact-number {
+                    display: block;
+                }
+            }
+        }
+    }
+}
