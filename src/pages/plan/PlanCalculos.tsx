@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import CounterArmaTuPlan from '../../components/plan/CounterArmaTuPlan';
 
-const PlanCalculos = () => {
+const PlanCalculos = (): ReactElement => {
     return (
         <div className='plan-calculos'>
             <section>

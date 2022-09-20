@@ -1,8 +1,9 @@
 import ImgCarMobile from '../../assets/home/car_mobile.svg';
 import IconHomeImgCar from '../../assets/home/home-img_car';
 import IconHomeImageBackground from '../../assets/home/home-img-bg.svg';
+import { ReactElement } from 'react';
 
-const HomeLeft = () => {
+const HomeLeft = (): ReactElement => {
     return (
         <>
             <div className='home-absolute-container'>

@@ -1,8 +1,9 @@
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import IconCheck from '../../assets/plan/gl_check.svg'
 import { useStatePlanContext } from '../../contexts/planContext'
 
-const PlanFooter = () => {
+const PlanFooter: FC = () => {
     const { amount } = useStatePlanContext()
     const navigate = useNavigate()
     const handleClick = () => {

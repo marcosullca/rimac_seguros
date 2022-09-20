@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import ImgBgMobile from '../../assets/finish/img-bg-mobile.svg'
 import ImgBgDesktop from '../../assets/finish/img-bg-desktop.svg'
-const PageFinish = () => {
+const PageFinish = (): ReactElement => {
 
     return (
         <div className='finish'>

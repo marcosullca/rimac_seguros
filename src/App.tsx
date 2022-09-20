@@ -6,7 +6,7 @@ import { PlanProviderComponent } from './contexts/planContext';
 import './styles/base.scss'
 import ScrollToTop from './components/ScrollToTop';
 
-function App() {
+function App(): JSX.Element {
   return (
     <AppProvider>
       <div className="app">
