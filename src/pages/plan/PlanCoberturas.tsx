@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import IconArrowTop from '../../assets/plan/arrow-top.svg';
 import ImgTheft from '../../assets/plan/icon_theft.svg';
 import ImgDamage from '../../assets/plan/icon_damage.svg';
 import ImgPerdidaTotal from '../../assets/plan/icon_perdidatotal.svg';
 import InputSwitch from '../../components/plan/InputSwitch';
 
-const PlanCoberturas = () => {
+const PlanCoberturas = (): ReactElement => {
     return (
         <div className='plan-coberturas'>
             <p>Agrega o quita coberturas</p>

@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { FC } from 'react'
 import IconArrowLeft from '../../assets/plan/arrow-left'
 import ImgUser from '../../assets/plan/plan-img-user.svg'
 import { useAppUserState } from '../../contexts/appContext'
 
-const PlanInfo = () => {
+const PlanInfo: FC = () => {
     const { user: { placa } } = useAppUserState()
 
     return (

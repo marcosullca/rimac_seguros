@@ -1,7 +1,8 @@
+import { ReactElement } from 'react';
 import FormCotizar from '../../components/home/FormCotizar';
 import HomeLeft from './HomeLeft';
 
-const PageHome = () => (
+const PageHome = (): ReactElement => (
     <div className='home'>
         <div className='home-left'>
             <HomeLeft />

@@ -32,6 +32,10 @@ const RoutesApp = () => {
                 {
                     path: "gracias",
                     element: <PageFinish />
+                },
+                {
+                    path: "*",
+                    element: <p>Not Found 404</p>
                 }
             ]
         }

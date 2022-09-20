@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { fetchBasic } from '../../api/fetch';
 import { useAppUserState, UserInterface } from '../../contexts/appContext';
@@ -18,7 +18,7 @@ const initialErrors = {
   placa: "",
 }
 
-const FormCotizar = () => {
+const FormCotizar: FC<{}> = () => {
   const { setuser } = useAppUserState()
   const navigate = useNavigate()
 

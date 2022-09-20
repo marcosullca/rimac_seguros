@@ -1,10 +1,11 @@
+import { ReactElement } from 'react';
 import PlanStepper from './PlanStepper';
 import PlanInfo from './PlanInfo';
 import PlanCalculos from './PlanCalculos';
 import PlanFooter from './PlanFooter';
 import PlanCoberturas from './PlanCoberturas';
 
-const PagePlan = () => {
+const PagePlan = (): ReactElement => {
 
     return (
         <div className='plan'>
