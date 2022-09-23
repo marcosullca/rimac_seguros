@@ -1,4 +1,5 @@
 import React, { createContext, FC, useContext } from "react";
+import { ActionDispatchPlanContext, CoberturaInterface, StatePlanContext } from "../types";
 
 const MONTO_BASE = 20
 const PAGO_LLANTA_ROBADA = 15
@@ -9,99 +10,80 @@ interface AppProviderProps {
     children: React.ReactNode
 }
 
-interface StateInterface {
-    amount: number,
-    cobertura: {
-        llanta_robada: boolean,
-        choque_luz_roja: boolean,
-        atropello: boolean
-    },
-    current: number
-}
-
-// interface ActionInterface {
-//     type: string
-// }
-
 const initialValue = {
     amount: 0,
-    cobertura: {
-        llanta_robada: false,
-        choque_luz_roja: false,
-        atropello: false
-    },
-    current: 0
+    oldCounterValue: 14000,
+    coberturas: []
 };
 
-const PlanStateContext = createContext<any>(initialValue);
+const PlanStateContext = createContext<StatePlanContext>(initialValue);
 
-const PlanDispatchContext = createContext<any>(null);
+const PlanDispatchContext = createContext<React.Dispatch<ActionDispatchPlanContext>>(() => { });
 
-const calcCobertura = (state: StateInterface, prizeCobertura: number, action: { type: string, current: number, status: boolean }) => {
-    let newAmount = state.amount
-    if (action.current > 16000 && action.type === "CHOQUE_LUZ_ROJA") {
-        newAmount -= PAGO_CHOQUE_LUZ_ROJA
-    }
-    if (action.status) {
-        if (!Object.values(state.cobertura).includes(true)) {
-            newAmount += MONTO_BASE
-        }
-        newAmount += prizeCobertura
-    } else {
-        if (Object.values(state.cobertura).filter(item => !!item).length === 1) {
-            newAmount -= MONTO_BASE
-        }
-        newAmount -= prizeCobertura
-    }
+const newArrayCoberturas = (state: StatePlanContext, newCobertura: CoberturaInterface, status: boolean) => {
+    const { name, prize } = newCobertura
+    const { coberturas } = state
 
-    return newAmount
+    if (status) return [...coberturas, { name, prize }]
+    return coberturas.filter(v => v.name !== name)
 }
 
-const calcCoberturaWithSumaAsegurada = (action: { current: number }, state: StateInterface) => {
-    let newAmount = state.amount
-    if (action.current > 16000 && state.cobertura.choque_luz_roja && state.current <= 16000) {
-        newAmount -= PAGO_CHOQUE_LUZ_ROJA
-    }
-    if (action.current <= 16000 && state.cobertura.choque_luz_roja && state.current > 16000) {
-        newAmount += PAGO_CHOQUE_LUZ_ROJA
-    }
-    return newAmount
+const newAmountResult = (state: StatePlanContext, action: ActionDispatchPlanContext) => {
+    const { current = 0 } = action
+    if (state.oldCounterValue <= 16000 && current > 16000) return (- PAGO_CHOQUE_LUZ_ROJA)
+    if (state.oldCounterValue > 16000 && current <= 16000) return PAGO_CHOQUE_LUZ_ROJA
+    return 0
 }
+const reducer = (state: StatePlanContext, action: ActionDispatchPlanContext) => {
+    const { type, status = false, current = 0 } = action;
+    const { coberturas, amount, oldCounterValue } = state
 
-const reducer = (state: StateInterface, action: any) => {
-    const { type, status, current } = action;
-    const { cobertura } = state
+    const prizeCobertura = (() => {
+        switch (type.toUpperCase()) {
+            case 'LLANTA_ROBADA':
+                return PAGO_LLANTA_ROBADA;
+            case 'CHOQUE_LUZ_ROJA':
+                return PAGO_CHOQUE_LUZ_ROJA
+            case 'ATROPELLO':
+                return PAGO_ATROPELLO
+            default:
+                return 0
+        }
+    })()
 
-    switch (type) {
+    const newCobertura = { prize: prizeCobertura, name: type }
+
+    const arrayCoberturas = newArrayCoberturas(state, newCobertura, status)
+    switch (type.toUpperCase()) {
         case 'CURRENT_SUMA_ASEGURADA':
+            const verifyCobertura = coberturas.find(v => v.name === "choque_luz_roja")
             return {
                 ...state,
-                amount: calcCoberturaWithSumaAsegurada(action, state),
-                current
+                amount: amount + (verifyCobertura ? newAmountResult(state, action) : 0),
+                oldCounterValue: current
             }
-        case 'LLANTA_ROBADA':
-            return {
-                ...state,
-                amount: calcCobertura(state, PAGO_LLANTA_ROBADA, action),
-                cobertura: { ...cobertura, llanta_robada: status },
-                current
-            };
-        case 'CHOQUE_LUZ_ROJA':
-            return {
-                ...state,
-                amount: calcCobertura(state, PAGO_CHOQUE_LUZ_ROJA, action),
-                cobertura: { ...cobertura, choque_luz_roja: status }
-            };
-        case 'ATROPELLO':
-            return {
-                ...state,
-                amount: calcCobertura(state, PAGO_ATROPELLO, action),
-                cobertura: { ...cobertura, atropello: status }
-            };
         default:
-            return state;
+            const preAmount = arrayCoberturas.reduce((acc, curr) => acc + curr.prize, 0)
+            const montoBase = logicSumMontoBase(coberturas, status, type)
+            const coberturaChoqueLuzRoja = validateCobertura(arrayCoberturas, oldCounterValue)
+            return {
+                ...state,
+                amount: preAmount + montoBase - coberturaChoqueLuzRoja,
+                coberturas: arrayCoberturas,
+            };
     }
 };
+
+const validateCobertura = (coberturas: CoberturaInterface[], oldCounterValue: number) => {
+    if (coberturas.find(v => v.name === "choque_luz_roja") && oldCounterValue > 16000) return PAGO_CHOQUE_LUZ_ROJA
+    return 0;
+
+}
+
+const logicSumMontoBase = (coberturas: CoberturaInterface[], status: boolean, type: string) => {
+    if (!status && coberturas.length === 1) return 0
+    return MONTO_BASE
+}
 
 
 const PlanProviderComponent: FC<AppProviderProps> = ({ children }) => {
@@ -116,17 +98,17 @@ const PlanProviderComponent: FC<AppProviderProps> = ({ children }) => {
     )
 }
 
-const useStatePlanContext = (): StateInterface => {
+const useStatePlanContext = () => {
     const state = useContext(PlanStateContext)
     if (!state) throw new Error("Not found context")
 
     return state
 }
-const useDispatchPlanContext = (): any => {
-    const state = useContext(PlanDispatchContext)
-    if (!state) throw new Error("Not found context")
+const useDispatchPlanContext = () => {
+    const dispatch = useContext(PlanDispatchContext)
+    if (!dispatch) throw new Error("Not found context")
 
-    return state
+    return dispatch
 }
 
 

@@ -8,8 +8,7 @@ const InputSwitch: FC<InputSwitchProps> = ({ name }) => {
     const action = useDispatchPlanContext()
 
     const handleChange = (e: React.ChangeEvent<any>) => {
-        if (e.target.checked) return action({ type: `${name.toUpperCase()}`, status: true })
-        return action({ type: `${name.toUpperCase()}`, status: false })
+        action({ type: name, status: e.target.checked })
     }
     return (
         <label className="switch">

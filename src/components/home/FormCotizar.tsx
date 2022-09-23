@@ -29,8 +29,7 @@ const FormCotizar: FC<{}> = () => {
     e.preventDefault()
 
     const errorsValidated = validationForm(values)
-    if (Object.keys(errorsValidated).length > 0) return setErrors(errorsValidated)
-    if (!requiredTerms) return;
+    if (Object.keys(errorsValidated).length > 0 || !requiredTerms) return setErrors(errorsValidated)
 
     const body = {
       ...values,
@@ -49,11 +48,12 @@ const FormCotizar: FC<{}> = () => {
 
 
   const handleChange = (e: React.ChangeEvent<any>) => {
-
-    if (e.target.name === "placa" && e.target.value.length === 8) return;
-    if (e.target.name === "celular" && e.target.value.length === 10) return;
-    if (e.target.name === "numDocumento" && e.target.value.length === 9) return;
-    if (e.target.name === "placa" && e.target.value.length === 3) {
+    const name = e.target.name
+    const lengthValue = e.target.value.length
+    if (name === "placa" && lengthValue === 8) return;
+    if (name === "celular" && lengthValue === 10) return;
+    if (name === "numDocumento" && lengthValue === 9) return;
+    if (name === "placa" && lengthValue === 3) {
       return setValues((v) => ({ ...v, placa: (e.target.value + "-").toUpperCase() }))
     }
     setValues((v) => ({ ...v, [e.target.name]: e.target.value.trim().toUpperCase() }))

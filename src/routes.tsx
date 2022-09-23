@@ -7,7 +7,7 @@ const PagePlan = React.lazy(() => import("./pages/plan"))
 const PageFinish = React.lazy(() => import("./pages/finish"))
 const App = React.lazy(() => import("./App"))
 
-const RoutesApp = () => {
+const RoutesApp: React.FC = () => {
     return useRoutes([
         {
             path: '',
