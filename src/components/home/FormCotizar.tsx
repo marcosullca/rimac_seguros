@@ -2,7 +2,8 @@ import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { fetchBasic } from '../../api/fetch';
 import { useAppUserState, UserInterface } from '../../contexts/appContext';
-import { FormErrors, FormValues, validationForm } from '../../utils/validation';
+import { StructInputs, ProcessForm } from '../../utils/validation';
+import InputTextForm from '../InputTextForm';
 
 
 const initialValue = {
@@ -12,23 +13,37 @@ const initialValue = {
   placa: "",
 }
 
-const initialErrors = {
-  numDocumento: "",
-  celular: "",
-  placa: "",
+const validateForm = {
+  numDocumento: {
+    type: "integer",
+    maxLength: 8,
+    minLength: 8,
+  },
+  celular: {
+    type: "integer",
+    maxLength: 9,
+    minLength: 9,
+  },
+  placa: {
+    maxLength: 7,
+    minLength: 7,
+  }
 }
+const initialErrors = {}
 
 const FormCotizar: FC<{}> = () => {
   const { setuser } = useAppUserState()
   const navigate = useNavigate()
 
-  const [values, setValues] = React.useState<FormValues>(initialValue)
-  const [errors, setErrors] = React.useState<FormErrors>(initialErrors)
+  const [values, setValues] = React.useState<StructInputs>(initialValue)
+  const [errors, setErrors] = React.useState<StructInputs>(initialErrors)
   const [requiredTerms, setRequiredTerms] = React.useState(false)
   const onSubmit = (e: React.MouseEvent<HTMLFormElement, MouseEvent>) => {
     e.preventDefault()
 
-    const errorsValidated = validationForm(values)
+    const processInputs = new ProcessForm(values, validateForm)
+
+    const errorsValidated = processInputs.processErrors().getFormErrors()
     if (Object.keys(errorsValidated).length > 0 || !requiredTerms) return setErrors(errorsValidated)
 
     const body = {
@@ -57,7 +72,6 @@ const FormCotizar: FC<{}> = () => {
       return setValues((v) => ({ ...v, placa: (e.target.value + "-").toUpperCase() }))
     }
     setValues((v) => ({ ...v, [e.target.name]: e.target.value.trim().toUpperCase() }))
-
   }
 
   return (
@@ -66,25 +80,18 @@ const FormCotizar: FC<{}> = () => {
 
       <div className='container-form__input'>
         <div className='container-form__documento'>
-          <select onChange={handleChange} name="tipoDocumento">
+          <select onChange={handleChange} name="tipoDocumento" title='Tipo Documento'>
             <option value="1">DNI</option>
             <option value="2">RUC</option>
             <option value="3">C.E.</option>
           </select>
-          <div className='form-input__documento'>
-            <input type="text" placeholder='Nro. de doc' onChange={handleChange} value={values.numDocumento} name="numDocumento" />
-          </div>
+          <input type="text" placeholder='Nro. de doc' onChange={handleChange} value={values.numDocumento} name="numDocumento" />
         </div>
         {errors.numDocumento && (<span>{errors.numDocumento}</span>)}
       </div>
-      <div className='container-form__input'>
-        <input type="text" placeholder='Celular' className='home-right__celular' value={values.celular} onChange={handleChange} name="celular" />
-        {errors.celular && (<span>{errors.celular}</span>)}
-      </div>
-      <div className='container-form__input'>
-        <input type="text" placeholder='Placa' className='home-right__placa' value={values.placa} onChange={handleChange} name="placa" />
-        {errors.placa && (<span>{errors.placa}</span>)}
-      </div>
+      <InputTextForm error={errors.celular} handleChange={handleChange} value={values.celular} placeholder='Celular' name="celular" />
+      <InputTextForm error={errors.placa} handleChange={handleChange} value={values.placa} placeholder='Placa' name="placa" />
+
       <div className='home-right__cb'>
         <input type="checkbox" onChange={(e) => { setRequiredTerms(e.target.checked) }} />
         <span>Acepto la</span>

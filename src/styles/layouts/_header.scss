@@ -1,8 +1,14 @@
 .app {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 62px 1fr;
+    grid-template-columns: auto;
+    grid-template-areas:
+        "header"
+        "body";
     &-top {
         background-color: $color-primary-n100;
         grid-area: header;
-        height: 62px;
         display: flex;
         &__contact {
             margin-left: auto;
@@ -38,6 +44,10 @@
             margin-right: 24px;
             font-size: 14px;
         }
+    }
+
+    &-body {
+        grid-area: body;
     }
 }
 @media screen and (min-width: 1024px) {
