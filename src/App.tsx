@@ -21,9 +21,11 @@ function App(): JSX.Element {
             </div>
           </div>
         </div>
-        <PlanProviderComponent>
-          <Outlet />
-        </PlanProviderComponent>
+        <div className='app-body'>
+          <PlanProviderComponent>
+            <Outlet />
+          </PlanProviderComponent>
+        </div>
       </div>
       <ScrollToTop />
     </AppProvider>
